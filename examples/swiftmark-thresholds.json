@@ -1,0 +1,17 @@
+{
+  "repo": "swiftmark",
+  "thresholds": {
+    "signal": 3,
+    "slack": 1,
+    "confidence": 1,
+    "drag": 2,
+    "ship": 171,
+    "watch": 105
+  },
+  "terms": [
+    "file span",
+    "terminal width",
+    "argument risk",
+    "report density"
+  ]
+}

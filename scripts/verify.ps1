@@ -65,3 +65,13 @@ swiftc -sdk $swiftSdk.FullName src/Core.swift src/DomainReview.swift tests/Test.
 ./build/test.exe
 
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/check-swiftmark-detail.ps1
+
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/check-swiftmark-properties.ps1
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/check-swiftmark-golden.ps1
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

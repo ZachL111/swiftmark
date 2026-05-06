@@ -1,68 +1,40 @@
 # swiftmark
 
-`swiftmark` treats cli tools as a local verification problem. The Swift implementation is intentionally narrow, but the fixtures and notes make the behavior explicit.
+`swiftmark` keeps a focused Swift implementation around cli tools. The project goal is to index Markdown headings, links, and backlinks across a documentation tree.
 
-## Swiftmark Checkpoints
+## Purpose
 
-Treat the compact fixture as the contract and the extended examples as a scratchpad. The code should stay boring enough that a change in behavior is obvious from the test output.
+The point is to make a small domain rule concrete enough that a reader can change it and immediately see what broke.
 
-## What This Is For
+## Swiftmark Review Notes
 
-This project keeps the domain idea close to the tests. That makes it useful as a reference implementation, a small experiment, or a starting point for a more specialized tool.
+For a quick review, compare `file span` with `terminal width` before reading the middle cases.
 
-## Useful Pieces
+## What Is Covered
 
-- Models terminal output with deterministic scoring and explicit review decisions.
-- Uses fixture data to keep argument shape changes visible in code review.
-- Includes extended examples for file input, including `recovery` and `degraded`.
-- Documents repeatable reports tradeoffs in `docs/operations.md`.
-- Runs locally with a single verification command and no external credentials.
+- `fixtures/domain_review.csv` adds cases for file span and terminal width.
+- `metadata/domain-review.json` records the same cases in structured form.
+- `config/review-profile.json` captures the read order and the two review questions.
+- `examples/swiftmark-walkthrough.md` walks through the case spread.
+- The Swift code includes a review path for `file span` and `terminal width`.
+- `docs/field-notes.md` explains the strongest and weakest cases.
 
-## Architecture Notes
+## Implementation Notes
 
-The design is intentionally direct: parse or construct a signal, score it, classify it, and verify the expected branch. This makes the repository useful for studying cli tools behavior without needing a service or database unless the language project itself is SQL. The Swift project compiles a minimal command-line test harness against the local Windows SDK.
+The fixture data drives the tests. The code stays thin, while `metadata/domain-review.json` and `config/review-profile.json` explain what each case is meant to protect.
 
-## Project Layout
+The Swift code keeps the review rule close to the tests.
 
-- `src`: primary implementation
-- `tests`: verification harness
-- `fixtures`: compact golden scenarios
-- `examples`: expanded scenario set
-- `metadata`: project constants and verification metadata
-- `docs`: operations and extension notes
-- `scripts`: local verification and audit commands
-
-## Tooling
-
-Install Swift and run the commands from the repository root. The project does not need credentials or a hosted service.
-
-## Local Workflow
+## Command
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/verify.ps1
 ```
 
-This runs the language-level build or test path against the compact fixture set.
+## Audit Path
 
-## Quality Gate
+The verifier is intentionally local. It should fail if the fixture score math, lane assignment, or language-specific test drifts.
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File scripts/audit.ps1
-```
+## Limits
 
-The audit command checks repository structure and README constraints before it delegates to the verifier.
-
-## Case Study
-
-`examples/extended_cases.csv` adds six named cases. I kept the names plain so failures are easy to read in a terminal: baseline, pressure, surge, degraded, recovery, and boundary.
-
-## Scope
-
-The scoring model is simple by design. More domain-specific behavior should be added through explicit adapters or extra fixture classes rather than hidden constants.
-
-## Expansion Ideas
-
-- Add a comparison mode that shows how decisions change when one signal is adjusted.
-- Add a loader for `examples/extended_cases.csv` and promote selected cases into the language test suite.
-- Add a short report command that prints the score breakdown for a single scenario.
-- Add one more cli tools fixture that focuses on a malformed or borderline input.
+The repository is intentionally scoped to local checks. I would expand it by adding adversarial fixtures before adding features.

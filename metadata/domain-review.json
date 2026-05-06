@@ -1,0 +1,73 @@
+{
+  "repo": "swiftmark",
+  "language": "Swift",
+  "category": "CLI tools",
+  "goal": "Index Markdown headings, links, and backlinks across a documentation tree.",
+  "review_model": {
+    "terms": [
+      "file span",
+      "terminal width",
+      "argument risk",
+      "report density"
+    ],
+    "lanes": [
+      "ship",
+      "watch",
+      "hold"
+    ],
+    "score": "signal * 2 + slack + confidence - drag * 3",
+    "purpose": "surface the domain-specific cases that need the most careful review"
+  },
+  "cases": [
+    {
+      "name": "baseline",
+      "focus": "file span",
+      "signal": 74,
+      "slack": 23,
+      "drag": 21,
+      "confidence": 69,
+      "score": 177,
+      "lane": "ship"
+    },
+    {
+      "name": "stress",
+      "focus": "terminal width",
+      "signal": 78,
+      "slack": 22,
+      "drag": 32,
+      "confidence": 88,
+      "score": 170,
+      "lane": "ship"
+    },
+    {
+      "name": "edge",
+      "focus": "argument risk",
+      "signal": 86,
+      "slack": 26,
+      "drag": 31,
+      "confidence": 68,
+      "score": 173,
+      "lane": "ship"
+    },
+    {
+      "name": "recovery",
+      "focus": "report density",
+      "signal": 69,
+      "slack": 33,
+      "drag": 16,
+      "confidence": 63,
+      "score": 186,
+      "lane": "ship"
+    },
+    {
+      "name": "stale",
+      "focus": "file span",
+      "signal": 90,
+      "slack": 47,
+      "drag": 9,
+      "confidence": 62,
+      "score": 262,
+      "lane": "ship"
+    }
+  ]
+}
